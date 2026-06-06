@@ -4,7 +4,7 @@ type props = {
   data: string;
 };
 
-export function Card({ cardObj }: any) {
+export function Card({ cardObj }: { cardObj: props }) {
   // export function Card({ title, description, data }: props) {
   return (
     <>
