@@ -1,35 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
+import { useFetch } from './useFetch';
 
 type post = { id: number; title: string };
 function App() {
   const [posts, setPosts] = useState<post[]>([]);
 
-  // useEffect(() => {
-  //   fetch('https://jsonplaceholder.typicode.com/posts')
-  //     .then((r) => r.json())
-  //     .then(setPosts);
-  // }, []);
+  const { data, loading, error } = useFetch<post[]>(
+    'https://jsonplaceholder.typicode.com/posts',
+  );
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      signal: controller.signal,
-    })
-      .then((r) => r.json())
-      .then(setPosts)
-      .catch((e) => {
-        if (e.name !== 'AbortError') console.error(e);
-      });
-
-    return () => controller.abort();
-  }, []);
-
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
   return (
     <>
       <ul>
-        {posts.map((p) => (
+        {data?.map((p) => (
           <li key={p.id}>{p.title}</li>
         ))}
       </ul>
