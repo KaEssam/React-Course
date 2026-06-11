@@ -1,7 +1,15 @@
 import './App.css';
+import { BTN } from './btn';
+import { ThemeProvider } from './theme';
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <ThemeProvider>
+        <BTN></BTN>
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default App;
