@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 export function Home() {
   return (
@@ -16,6 +16,20 @@ export function About() {
     <div>
       <h1>About Page</h1>
       <p>we the best ♥</p>
+      <Link to="/"> Home Page</Link>
+    </div>
+  );
+}
+
+export function Details() {
+  const { id } = useParams();
+  const id1 = Number(id);
+  console.log(typeof id);
+  console.log(typeof id1);
+  return (
+    <div>
+      <h1>Details Page</h1>
+      <p>page for {id}</p>
       <Link to="/"> Home Page</Link>
     </div>
   );
