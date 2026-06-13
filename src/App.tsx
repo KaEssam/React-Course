@@ -1,39 +1,33 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import z from 'zod';
 import './App.css';
 
-type form = { email: string; pass: string };
+const schema = z.object({
+  email: z.string().email({ message: 'Invalid email address' }),
+  pass: z
+    .string()
+    .min(6, { message: 'Password must be at least 6 characters' }),
+});
+
+type form = z.infer<typeof schema>;
+
 function App() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<form>();
+  } = useForm<form>({ resolver: zodResolver(schema) });
 
-  function onSumbit(data: form) {
+  function onSubmit(data: form) {
     console.log('sumbited', data);
   }
   return (
     <>
-      <form onSubmit={handleSubmit(onSumbit)}>
-        <input
-          {...register('email', { required: 'email is required' })}
-          placeholder="email"
-        />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input {...register('email')} />
         <p>{errors.email?.message}</p>
-        <input
-          {...register('pass', {
-            required: 'password is required',
-            minLength: {
-              value: 6,
-              message: 'password must be at least 6 characters',
-            },
-            maxLength: {
-              value: 20,
-              message: 'password must be less than 20 characters',
-            },
-          })}
-          placeholder="password"
-        />
+        <input {...register('pass')} placeholder="password" />
         <p>{errors.pass?.message}</p>
         <button type="submit">Login</button>
       </form>
