@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { AddList } from './AddPost';
 import './App.css';
 
 type post = { id: number; title: string };
@@ -17,6 +18,7 @@ function App() {
   if (isError) return <p>{(error as Error).message}</p>;
   return (
     <>
+      <AddList />
       <ul>
         {data!.map((p) => (
           <li key={p.id}>{p.title}</li>
