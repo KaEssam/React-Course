@@ -1,10 +1,8 @@
-import type { Theme } from '../types';
+import { useStore } from '../store/useStore';
 
-interface Prop {
-  theme: Theme;
-  toggleTheme: () => void;
-}
+export function ThemeToggle() {
+  const theme = useStore((state) => state.theme);
+  const toggleTheme = useStore((state) => state.toggleTheme);
 
-export function ThemeToggle({ theme, toggleTheme }: Prop) {
-  return <button onClick={toggleTheme}>Switch Theme</button>;
+  return <button onClick={toggleTheme}>{theme}</button>;
 }

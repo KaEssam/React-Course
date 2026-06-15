@@ -1,11 +1,8 @@
-import type { User } from '../types';
+import { useStore } from '../store/useStore';
 
-interface Props {
-  user: User;
-  logout: () => void;
-}
-
-export function UserList({ user, logout }: Props) {
+export function UserList() {
+  const user = useStore((state) => state.user);
+  const logout = useStore((state) => state.logout);
   return (
     <div>
       <p>{user.name}</p>
