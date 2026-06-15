@@ -1,15 +1,9 @@
-import type { Theme } from '../types';
 import { ThemeToggle } from './ThemeToggle';
 
-interface Prop {
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-export function Sidebar({ theme, toggleTheme }: Prop) {
+export function Sidebar() {
   return (
     <aside>
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      <ThemeToggle />
     </aside>
   );
 }

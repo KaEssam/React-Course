@@ -1,11 +1,7 @@
-import type { User } from '../types';
+import { useUser } from '../Context/UserContext';
 
-interface Props {
-  user: User;
-  logout: () => void;
-}
-
-export function UserList({ user, logout }: Props) {
+export function UserList() {
+  const { user, logout } = useUser();
   return (
     <div>
       <p>{user.name}</p>
