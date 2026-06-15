@@ -1,15 +1,14 @@
-import type { User } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../store';
+import { logout } from '../store/userSlice';
 
-interface Props {
-  user: User;
-  logout: () => void;
-}
-
-export function UserList({ user, logout }: Props) {
+export function UserList() {
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
   return (
     <div>
       <p>{user.name}</p>
-      <button onClick={logout}>Logout</button>
+      <button onClick={() => dispatch(logout())}>Logout</button>
     </div>
   );
 }

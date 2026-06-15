@@ -1,24 +1,13 @@
-import { useState } from 'react';
+import { Provider } from 'react-redux';
 import './App.css';
 import { Dashboard } from './Components/Dashboard';
-import type { Theme, User } from './types';
+import { store } from './store';
 
 function App() {
-  const [user] = useState<User>({ id: 1, name: 'Karim Essam', role: 'Admin' });
-  const [theme, setTheme] = useState<Theme>('light');
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
-  const logout = () => alert('Logged out');
   return (
-    <Dashboard
-      user={user}
-      theme={theme}
-      toggleTheme={toggleTheme}
-      logout={logout}
-    />
+    <Provider store={store}>
+      <Dashboard />
+    </Provider>
   );
 }
 

@@ -1,10 +1,9 @@
-import type { Theme } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../store';
+import { toggle } from '../store/themeSlice';
 
-interface Prop {
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-export function ThemeToggle({ theme, toggleTheme }: Prop) {
-  return <button onClick={toggleTheme}>Switch Theme</button>;
+export function ThemeToggle() {
+  const theme = useSelector((state: RootState) => state.theme);
+  const dispatch = useDispatch();
+  return <button onClick={() => dispatch(toggle())}>{theme}</button>;
 }
